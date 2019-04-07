@@ -3,7 +3,7 @@
 ## Installation & Usage
 
     git clone https://github.com/amal994/opioid_epidemic_viz.git
-    cd expack
+    cd opioid_epidemic_viz
     npm install
     
     npm run buildDev        // for development
