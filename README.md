@@ -2,7 +2,7 @@
 
 ## Installation & Usage
 
-    git clone https://github.com/amal994/opioid_epidemic_viz
+    git clone https://github.com/amal994/opioid_epidemic_viz.git
     cd expack
     npm install
     
