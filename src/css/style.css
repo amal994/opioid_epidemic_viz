@@ -1,5 +1,6 @@
 /* styles */
 /* called by your view template */
+:root { --var-color-grey: #898989; }
 
 * {
     box-sizing: border-box;
@@ -69,3 +70,37 @@ footer {
     padding-top: 25px;
     border-top: 1px solid lightgrey;
 }
+
+.parallax {
+    /* The image used
+    background-image: url("img_parallax.jpg");
+    */
+    /* Set a specific height */
+    height:100vh;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+#compare_death .line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2px;
+}
+
+#barchart text {
+    font-family: Helvetica;
+    color: var(--var-color-grey);
+}
+#barchart .axis path,
+#barchart .axis line {
+    fill: none;
+    stroke: var(--var-color-grey);
+    shape-rendering: crispEdges;
+}
+#barchart .x.axis {font-size: 15px;  }
+#barchart .y.axis {font-size: 12px; }

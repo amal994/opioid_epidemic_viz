@@ -7,13 +7,16 @@
 </head>
 <body>
 <div class="container-fluid">
+    <div class="row parallax">
     <h1>
         The Demographics of The Opioid Epidemic
     </h1>
     <p class="description">Who is most at risk for opioid overdose? It’s a growing concern in the United States as of
         late, yet there is a lack of clear direction in how researchers, doctors, and activists alike can work in tandem
         to save at-risk lives. </p>
-    <div class="row">
+    </div>
+    <h1> Timeline of Opioid overdose</h1>
+    <div class="row parallax">
         <div class="col-sm-2">
             <svg id="timeline" height="800">
                 <line x1="50" y1="0" x2="50" y2="600" style="stroke:rgb(42,51,255);stroke-width:2"></line>
@@ -26,7 +29,13 @@
             <svg id="map_visualization"></svg>
         </div>
     </div>
-    <div class="row">
+    <div class="row parallax">
+        <div class="col">
+            <h1> Death by Opioid overdose VS other causes of death</h1>
+            <div id="compare_opioid_death_barchart"> <svg id="compare_death"></svg></div>
+        </div>
+    </div>
+    <div class="row parallax">
         <div class="col">
             <img id="state_map_viz" src="../img/state.png" width="100%" alt="state"/>
         </div>
@@ -35,24 +44,24 @@
             <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
     </div>
-    <div class="row">
+    <div class="row parallax">
         <div class="col">
             <h1> Opioid overdose deaths by age</h1>
-            <img id="barchart" src="../img/grouped-bar.png" alt="barchart"/>
+            <svg id="barchart"></svg>
         </div>
     </div>
-    <div class="row">
+    <div class="row parallax">
         <div class="col d-flex align-items-center justify-content-center" style="height: 600px" >
             <h1> Attacking the Problem</h1>
         </div>
     </div>
-    <div class="row">
+    <div class="row parallax">
         <div class="col">
             <h1> Analysis of Cause</h1>
-            <img id="linechart" src="../img/linechart.png" alt="linechart"/>
+            <svg id="attack_problem"></svg>
         </div>
     </div>
-    <div class="row">
+    <div class="row parallax">
         <div class="col  d-flex align-items-center justify-content-center"  style="height: 600px">
             <h1> Conclusion</h1>
         </div>
