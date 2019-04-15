@@ -7,6 +7,7 @@ import logMessage from './js/client';
 import comparative_chart from './js/comparative_chart';
 import barchart from './js/barchart';
 import attacking_problem_chart from './js/attacking_problem_chart';
+import * as d3 from 'd3';
 
 // Log message to console
 logMessage('Its finished!!');
@@ -17,8 +18,8 @@ if (module.hot)       // eslint-disable-line no-undef
 // client-side js
 // run by the browser each time your view template is loaded
 //This line loads the map into the page.
-map();
+map(d3);
 timeline();
-comparative_chart();
-barchart();
-attacking_problem_chart();
+comparative_chart(d3);
+barchart(d3);
+attacking_problem_chart(d3);

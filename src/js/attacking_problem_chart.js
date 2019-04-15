@@ -1,8 +1,7 @@
-import * as d3 from 'd3';
 import mcd_year1 from '../data/mcd_year.tsv';
 
 // Source: https://observablehq.com/@d3/multi-line-chart
-const attacking_problem_chart = function () {
+const attacking_problem_chart = function (d3) {
     var mcd_year = mcd_year1.join('\n');
     var original_data = d3.csvParse(mcd_year, ({Multiple_Cause_of_death, Year_Code, Deaths}) => {
         return {key: Multiple_Cause_of_death, year: Year_Code, value: Deaths};
@@ -85,7 +84,7 @@ const attacking_problem_chart = function () {
             .style("-webkit-tap-highlight-color", "transparent")
             .on("touchmove", moved)
             .on("touchstart", entered)
-            .on("touchend", left)
+            .on("touchend", left);
         else svg
             .on("mousemove", moved)
             .on("mouseenter", entered)

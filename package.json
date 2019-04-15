@@ -25,6 +25,7 @@
     "d3-geo": "^1.11.3",
     "es6-promise": "^4.2.6",
     "express": "^4.16.4",
+    "gsap": "^2.1.2",
     "intersection-observer": "^0.5.1",
     "jquery": "^3.3.1",
     "papaparse": "^4.6.3",
@@ -56,5 +57,9 @@
     "webpack-hot-middleware": "^2.24.3",
     "webpack-node-externals": "^1.7.2",
     "xml-loader": "^1.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/amal994/opioid_epidemic_viz.git"
   }
 }

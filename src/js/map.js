@@ -1,9 +1,8 @@
-import * as d3 from 'd3';
 import * as topojson from 'topojson';
 import us from '../data/10m.json';
 import county_data from '../data/county_year.tsv'
 //source: https://observablehq.com/@d3/bivariate-choropleth
-const map = function () {
+const map = function (d3) {
     const path = d3.geoPath();
     const colors = [
         "#e8e8e8", "#e8e8e8", "#ace4e4", "#5ac8c8",

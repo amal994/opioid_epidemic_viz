@@ -1,7 +1,6 @@
 import age_year from "../data/age_year.tsv";
-import * as d3 from 'd3';
 //source: https://bl.ocks.org/bytesbysophie/952a1003dd188410e9c6262b68a65f9a
-const barchart = function () {
+const barchart = function (d3) {
     var margin = {top: 40, right: 30, bottom: 30, left: 50},
         width = 1200 - margin.left - margin.right,
         height = 520 - margin.top - margin.bottom;
