@@ -1,4 +1,4 @@
-/* styles */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans); /* styles */
 /* called by your view template */
 :root { --var-color-grey: #898989; }
 
@@ -7,9 +7,14 @@
 }
 
 body {
-    font-family: "Benton Sans", "Helvetica Neue", helvetica, arial, sans-serif;
-    margin: 2em;
+    width: 100%;
+    height: 100%;
+    font-family: Lora, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #fff;
+    background-color: #ccc;
+    /*     margin: 2em; */
 }
+
 
 h1 {
     font-style: italic;
@@ -93,14 +98,35 @@ footer {
 }
 
 #barchart text {
-    font-family: Helvetica;
-    color: var(--var-color-grey);
+    font-family: Helvetica, serif;
 }
 #barchart .axis path,
 #barchart .axis line {
     fill: none;
-    stroke: var(--var-color-grey);
     shape-rendering: crispEdges;
 }
 #barchart .x.axis {font-size: 15px;  }
 #barchart .y.axis {font-size: 12px; }
+
+#fourtypercent path.color0 {
+    fill: #fff;
+}
+
+#fourtypercent path.color1 {
+    fill: rgba(255, 255, 255, .3);
+}
+
+#fourtypercent text {
+
+    font-weight: 400;
+    line-height: 16em;
+    fill: #fff;
+}
+
+#other_stats text {
+    fill: #fff;
+}
+
+#other_stats_captions text {
+    fill: #fff;
+}
