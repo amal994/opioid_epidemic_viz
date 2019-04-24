@@ -2,7 +2,7 @@
 const fourtypercent = function (d3){
 
 var duration = 1500,
-    transition = 200,
+    //transition = 200,
     percent = 40,
     width = window.innerWidth - 20,
     height = window.innerHeight - 20;
@@ -59,5 +59,5 @@ var timeout = setTimeout(function () {
 
 function calcPercent(percent) {
     return [percent, 100 - percent];
-};
+}
 }; export default fourtypercent;

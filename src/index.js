@@ -9,6 +9,8 @@ import barchart from './js/barchart';
 import attacking_problem_chart from './js/attacking_problem_chart';
 import oneinfive from './js/oneinfive';
 import fourtypercent from './js/fourtypercent';
+import other_stats from './js/other_stats';
+import other_stats_captions from './js/other_stats_captions';
 import * as d3 from 'd3';
 
 // Log message to console
@@ -22,8 +24,11 @@ if (module.hot)       // eslint-disable-line no-undef
 //This line loads the map into the page.
 oneinfive(d3);
 fourtypercent(d3);
+other_stats(d3);
+other_stats_captions(d3);
 map(d3);
 timeline();
 comparative_chart(d3);
 barchart(d3);
 attacking_problem_chart(d3);
+

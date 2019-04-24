@@ -16,6 +16,7 @@ body {
     /*     margin: 2em; */
 }
 
+
 h1 {
     font-style: italic;
     color: #373fff;
@@ -118,5 +119,11 @@ footer {
                 
                 font-weight: 400;
                 line-height: 16em;
+                fill: #fff;
+            }
+#other_stats text{
+                fill: #fff;
+            }
+#other_stats_captions text{
                 fill: #fff;
             }
