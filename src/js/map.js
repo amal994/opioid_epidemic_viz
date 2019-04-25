@@ -34,7 +34,7 @@ const map = function (d3) {
 
     // scrollama event handlers
     function handleStepEnter(response) {
-        console.log(response);
+        //console.log(response);
         // response = { element, direction, index }
         // add color to current step only
         step.classed('is-active', function (d, i) {
@@ -58,11 +58,11 @@ const map = function (d3) {
         // 		this will also initialize trigger observations
         // 3. bind scrollama event handlers (this can be chained like below)
         scroller.setup({
-            step: '#scrolly article .step',
+            step: '#scroll_map_timeline article .timeline_step',
             offset: 0.33,
             debug: true,
         })
-            .onStepEnter(handleStepEnter)
+            .onStepEnter(handleStepEnter);
         // setup resize event
         window.addEventListener('resize', handleResize);
     }
