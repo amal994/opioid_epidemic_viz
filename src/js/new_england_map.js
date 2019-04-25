@@ -6,7 +6,6 @@ const new_england_map = async function (d3) {
     const data = Object.assign(new Map(await d3.csv("https://gist.githubusercontent.com/mbostock/682b782da9e1448e6eaac00bb3d3cd9d/raw/0e0a145ded8b1672701dc8b2a702e51c648312d4/unemployment.csv", ({id, rate}) => [id, +rate])), {title: "Unemployment rate (%)"})
 
     //US
-
     function filter_states(result) {
         const states = ["09", "25", "23", "33", "44", "50"];
         result.objects.states.geometries = result.objects.states.geometries.filter(function(d) {
@@ -55,15 +54,6 @@ const new_england_map = async function (d3) {
     };
 
     var new_england = topojson.feature(us, us.objects.counties);
-
-    //var land = topojson.feature(us, {
-    //    type: "GeometryCollection",
-    //    geometries: us.objects.counties.geometries.filter(function (d) {
-    //        //var did = d.id.slice(0, 2);
-    //        var states = ["09", "25", "23", "33", "44", "50"];
-    //        return states.includes(d.id.slice(0, 2));
-    //    })
-    //});
 
     var projection = d3.geoIdentity().fitExtent([[20, 20], [940, 580]], new_england);
     var path = d3.geoPath(projection);

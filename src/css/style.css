@@ -130,3 +130,62 @@ footer {
 #other_stats_captions text {
     fill: #fff;
 }
+
+#scroll_map_timeline {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    background-color: #f3f3f3;
+    padding: 1rem;
+}
+#scroll_map_timeline > * {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+#scroll_map_timeline article {
+    position: relative;
+    padding: 0 1rem;
+    max-width: 10rem;
+}
+#scroll_map_timeline  figure {
+    position: -webkit-sticky;
+    position: sticky;
+    width: 100%;
+    margin: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+#scroll_map_timeline  figure div {
+    text-align: center;
+    padding: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 8rem;
+    font-weight: 900;
+    color: #fff;
+}
+#scroll_map_timeline  .timeline_step {
+    margin: 0 auto 1rem auto;
+    background-color: #3b3b3b;
+    color: #fff;
+}
+#scroll_map_timeline  .timeline_step:last-child {
+    margin-bottom: 0;
+}
+#scroll_map_timeline  .timeline_step.is-active {
+    background-color: goldenrod;
+    color: #3b3b3b;
+}
+#scroll_map_timeline  .timeline_step p {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.5rem;
+}

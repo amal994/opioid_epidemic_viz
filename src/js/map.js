@@ -1,8 +1,73 @@
 import * as topojson from 'topojson';
 import us from '../data/10m.json';
-import county_data from '../data/county_year.tsv'
+import county_data from '../data/county_year.tsv';
+import 'intersection-observer';
+import scrollama from 'scrollama';
+
 //source: https://observablehq.com/@d3/bivariate-choropleth
 const map = function (d3) {
+    // using d3 for convenience
+    const main = d3.select('main');
+    const scrolly = main.select('#scroll_map_timeline');
+    const figure = scrolly.select('figure');
+    const article = scrolly.select('article');
+    const step = article.selectAll('.timeline_step');
+
+    // initialize the scrollama
+    var scroller = scrollama();
+
+    // generic window resize listener event
+    function handleResize() {
+        // 1. update height of step elements aka timeline years
+        var stepH = Math.floor(window.innerHeight * 0.75);
+        step.style('height', stepH + 'px');
+        var figureHeight = window.innerHeight / 2;
+        var figureMarginTop = (window.innerHeight - figureHeight) / 2;
+
+        // map dimensions:
+        figure
+            .style('height', figureHeight + 'px')
+            .style('top', figureMarginTop + 'px');
+        // 3. tell scrollama to update new element dimensions
+        scroller.resize();
+    }
+
+    // scrollama event handlers
+    function handleStepEnter(response) {
+        console.log(response);
+        // response = { element, direction, index }
+        // add color to current step only
+        step.classed('is-active', function (d, i) {
+            return i === response.index;
+        });
+        // update graphic based on step
+        figure.select('p').text(response.index + 1);
+    }
+
+    //function setupStickyfill() {
+    //    d3.selectAll('.sticky').each(function () {
+    //        Stickyfill.add(this);
+    //    });
+    //}
+
+    function init() {
+        //setupStickyfill();
+        // 1. force a resize on load to ensure proper dimensions are sent to scrollama
+        handleResize();
+        // 2. setup the scroller passing options
+        // 		this will also initialize trigger observations
+        // 3. bind scrollama event handlers (this can be chained like below)
+        scroller.setup({
+            step: '#scrolly article .step',
+            offset: 0.33,
+            debug: true,
+        })
+            .onStepEnter(handleStepEnter)
+        // setup resize event
+        window.addEventListener('resize', handleResize);
+    }
+    // kick things off
+    init();
     const path = d3.geoPath();
     const colors = [
         "#e8e8e8", "#e8e8e8", "#ace4e4", "#5ac8c8",

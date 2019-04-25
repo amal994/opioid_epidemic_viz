@@ -6,84 +6,105 @@
     <link rel="shortcut icon" href="#">
 </head>
 <body>
-<h1>Understanding the Opioid Crisis in the United States</h1>
-<div class="container-fluid">
-    <div class="row parallax">
-        <div id="oneinfive">
-            <p>"As many as 1 in 5 people recieve precriptions opioids long term for noncancer pain"</p>
+<main>
+    <h1>Understanding the Opioid Crisis in the United States</h1>
+    <div class="container-fluid">
+        <div class="row parallax">
+            <div id="oneinfive">
+                <p>"As many as 1 in 5 people recieve precriptions opioids long term for noncancer pain"</p>
+            </div>
         </div>
-    </div>
-    <div class="row parallax">
-        <div id="fourtypercent">
-            <p> "More than 40% of all US opioid overdose deaths in 2016 involve a prescription opioid"</p>
+        <div class="row parallax">
+            <div id="fourtypercent">
+                <p> "More than 40% of all US opioid overdose deaths in 2016 involve a prescription opioid"</p>
+            </div>
         </div>
-    </div>
 
-    <div class="row parallax">
-        <div id="other_stats"></div>
-        <div id="other_stats_captions"></div>
-    </div>
+        <div class="row parallax">
+            <div id="other_stats"></div>
+            <div id="other_stats_captions"></div>
+        </div>
 
-    <div class="row parallax">
-    <h1>
-        The Demographics of The Opioid Epidemic
-    </h1>
-    <p class="description">Who is most at risk for opioid overdose? It’s a growing concern in the United States as of
-        late, yet there is a lack of clear direction in how researchers, doctors, and activists alike can work in tandem
-        to save at-risk lives. </p>
-    </div>
-    <h1> Timeline of Opioid overdose</h1>
-    <div class="row parallax">
-        <div class="col-sm-2">
-            <svg id="timeline" height="800">
-                <line x1="50" y1="0" x2="50" y2="600" style="stroke:rgb(42,51,255);stroke-width:2"></line>
-                <circle cx="50" cy="50" r="10" stroke="grey" stroke-width="4" fill="white"></circle>
-                <text x="65" y="55" fill="blue">2018 </text>
-                Sorry, your browser does not support inline SVG.
-            </svg>
+        <div class="row parallax">
+            <h1>
+                The Demographics of The Opioid Epidemic
+            </h1>
+            <p class="description">Who is most at risk for opioid overdose? It’s a growing concern in the United States
+                as of
+                late, yet there is a lack of clear direction in how researchers, doctors, and activists alike can work
+                in tandem
+                to save at-risk lives. </p>
         </div>
-        <div class="col-lg-10">
-            <svg id="map_visualization"></svg>
-        </div>
-    </div>
-    <div class="row parallax">
-        <div class="col">
-            <h1> Death by Opioid overdose VS other causes of death</h1>
-            <div id="compare_opioid_death_barchart"> <svg id="compare_death"></svg></div>
-        </div>
-    </div>
-    <div class="row parallax">
-        <div class="col">
-            <svg id="new_england_map"></svg>
-        </div>
-        <div class="col">
-            <h1 id="state_map_info">State with Most Opioid Deaths</h1>
-            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-    </div>
-    <div class="row parallax">
-        <div class="col">
-            <h1> Opioid overdose deaths by age</h1>
-            <svg id="barchart"></svg>
-        </div>
-    </div>
-    <div class="row parallax">
-        <div class="col d-flex align-items-center justify-content-center" style="height: 600px" >
-            <h1> Attacking the Problem</h1>
-        </div>
-    </div>
-    <div class="row parallax">
-        <div class="col">
-            <h1> Analysis of Cause</h1>
-            <svg id="attack_problem"></svg>
-        </div>
-    </div>
-    <div class="row parallax">
-        <div class="col  d-flex align-items-center justify-content-center"  style="height: 600px">
-            <h1> Conclusion</h1>
-        </div>
-    </div>
+        <section id="scroll_map_timeline">
+            <article id="timeline">
+                <div class='timeline_step' data-step='1'>
+                    <p>1999</p>
+                </div>
+                <div class='timeline_step' data-step='2'>
+                    <p>2000</p>
+                </div>
+                <div class='timeline_step' data-step='3'>
+                    <p>2001</p>
+                </div>
+                <div class='timeline_step' data-step='4'>
+                    <p>2002</p>
+                </div>
+            </article>
+            <figure>
+                <header>
+                    <h1> Timeline of Opioid overdose</h1>
+                </header>
+                <div>
+                <svg id="map_visualization"></svg>
+                </div>
+            </figure>
+        </section>
 
-</div>
+        <div class="row parallax">
+            <div class="col">
+                <h1> Death by Opioid overdose VS other causes of death</h1>
+                <div id="compare_opioid_death_barchart">
+                    <svg id="compare_death"></svg>
+                </div>
+            </div>
+        </div>
+        <div class="row parallax">
+            <div class="col">
+                <svg id="new_england_map"></svg>
+            </div>
+            <div class="col">
+                <h1 id="state_map_info">State with Most Opioid Deaths</h1>
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+        </div>
+        <div class="row parallax">
+            <div class="col">
+                <h1> Opioid overdose deaths by age</h1>
+                <svg id="barchart"></svg>
+            </div>
+        </div>
+        <div class="row parallax">
+            <div class="col d-flex align-items-center justify-content-center" style="height: 600px">
+                <h1> Attacking the Problem</h1>
+            </div>
+        </div>
+        <div class="row parallax">
+            <div class="col">
+                <h1> Analysis of Cause</h1>
+                <svg id="attack_problem"></svg>
+            </div>
+        </div>
+        <div class="row parallax">
+            <div class="col  d-flex align-items-center justify-content-center" style="height: 600px">
+                <h1> Conclusion</h1>
+            </div>
+        </div>
+
+    </div>
+</main>
 </body>
 </html>
