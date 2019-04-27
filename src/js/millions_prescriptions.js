@@ -1,4 +1,4 @@
-import scrollama from 'scrollama';
+
 //Sources:
 //https://bocoup.com/blog/smoothly-animate-thousands-of-points-with-html5-canvas-and-d3
 const prescriptions = function(d3) {
@@ -6,64 +6,10 @@ const prescriptions = function(d3) {
         .attr("viewBox", "0 0 960 600")
         .style("width", "100%")
         .style("height", "auto");
-    // using d3 for convenience
-    const main = d3.select('main');
-    const scrolly = main.select('#intro_scrollable');
-    const step = scrolly.selectAll('.step');
 
-    // initialize the scrollama
-    var scroller_stat = scrollama();
-    // generic window resize listener event
-    function handleResize() {
-        // 1. update height of step elements aka timeline years
-        var stepH = Math.floor(window.innerHeight/2);
-        step.style('height', stepH + 'px');
-        scroller_stat.resize();
-    }
-
-    // scrollama event handlers
-    function handleStepEnter(response) {
-        //console.log(response);
-        // response = { element, direction, index }
-        // add color to current step only
-        step.classed('is-active', function (d, i) {
-            return i === response.index;
-        });
-
-        // update graphic based on step
-        if(response.index === 0 && response.direction === 'down' ){
-            layouts = [toGrid, toBeforeBottle, toBottle];
-            currLayout = 0;
-            animate(toBeforeBottle);
-        }
-        else if(response.index === 0 && response.direction === 'up' ){
-            layouts = [toBottle, toBeforeBottle, toGrid];
-            currLayout = 0;
-            animate(toBeforeBottle);
-        }
-    }
-
-    function init() {
-        // 1. force a resize on load to ensure proper dimensions are sent to scrollama
-        handleResize();
-        // 2. setup the scroller passing options
-        // 		this will also initialize trigger observations
-        // 3. bind scrollama event handlers (this can be chained like below)
-        scroller_stat.setup({
-            step: '#intro_scrollable .step',
-            offset: 0.2,
-            debug: true,
-        })
-            .onStepEnter(handleStepEnter);
-        // setup resize event
-        window.addEventListener('resize', handleResize);
-    }
-    // kick things off
-    init();
     function gridLayout(points, pointWidth, gridWidth) {
         const pointHeight = pointWidth;
         const pointsPerRow = Math.floor(gridWidth / pointWidth);
-        const numRows = points.length / pointsPerRow;
 
         points.forEach((point, i) => {
             point.x = pointWidth * (i % pointsPerRow);
@@ -73,10 +19,9 @@ const prescriptions = function(d3) {
         return points;
     }
 
-    function beforeBottleLayout(points, pointWidth, gridWidth) {
+    function beforeBottleLayout(points, pointWidth) {
         const pointHeight = pointWidth;
         const pointsPerRow = Math.floor(150 / (pointWidth-10));
-        const numRows = points.length / pointsPerRow;
 
         points.forEach((point, i) => {
             point.x = (pointWidth-10) * (i % pointsPerRow)+55;
@@ -85,10 +30,9 @@ const prescriptions = function(d3) {
 
         return points;
     }
-    function bottleLayout(points, pointWidth, gridWidth) {
+    function bottleLayout(points, pointWidth) {
         const pointHeight = pointWidth;
         const pointsPerRow = Math.floor(150 / (pointWidth-10));
-        const numRows = points.length / pointsPerRow;
 
         points.forEach((point, i) => {
             point.x = (pointWidth-10) * (i % pointsPerRow)+55;
@@ -211,9 +155,9 @@ const prescriptions = function(d3) {
     const toGrid = (points) => gridLayout(points,
         pointWidth + pointMargin, width);
     const toBeforeBottle = (points) => beforeBottleLayout(points,
-        pointWidth + pointMargin, width);
+        pointWidth + pointMargin);
     const toBottle = (points) => bottleLayout(points,
-        pointWidth + pointMargin, width);
+        pointWidth + pointMargin);
 
     let layouts = [toGrid, toBeforeBottle, toBottle];
     let currLayout = 0;
@@ -262,13 +206,13 @@ const prescriptions = function(d3) {
             if (t === 1) {
                 // stop this timer for this layout and start a new one
                 timer.stop();
-                if(currLayout == 1){
+                if(currLayout === 1){
                     pills.selectAll("circle").remove();
                 }
             }
         });
     }
-
+    animate(toBeforeBottle);
 };
 
 export default prescriptions;

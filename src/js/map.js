@@ -32,7 +32,6 @@ const map = function (d3) {
             return i === response.index;
         });
         // update graphic based on step
-        figure.select('p').text(response.index + 1);
     }
 
 
