@@ -4,8 +4,8 @@ const fourtypercent = function (d3) {
     var duration = 1500,
         //transition = 200,
         percent = 40,
-        width = window.innerWidth - 20,
-        height = window.innerHeight - 20;
+        width = window.innerWidth - 500,
+        height = window.innerHeight - 60;
 
     var dataset = {
             lower: calcPercent(0),

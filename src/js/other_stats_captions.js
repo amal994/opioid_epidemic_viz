@@ -1,28 +1,24 @@
-const other_stats_captions = function (d3) {
+const other_stats_captions = function (d3, i) {
     var svg = d3.select("#other_stats_captions")
         .append("svg")
-        .attr("width", 2000)
-        .attr("height", 250);
+        .attr("width", "100%")
+        .attr("height", "100%");
 
+    let caption = "";
+    if(i === 0) {
+        caption = "million people abused prescription opioids";
+    }
+    else if (i === 1) {
+        caption = "people are hospitalized daily for opioid misuse";
+    }
+    else if (i === 2) {
+        caption = "billion dollar economic burden on the U.S.";
+    }
 // caption 1
     svg.append("text")
-        .attr("x", 30)
+        .attr("x", 300)
         .attr("y", 20)
-        .text("million people abused prescription opioids")
-        .attr("font-size", "15px");
-
-// caption 2
-    svg.append("text")
-        .attr("x", 470)
-        .attr("y", 20)
-        .text("people are hospitalized daily for opioid misuse")
-        .attr("font-size", "15px");
-
-// caption 3
-    svg.append("text")
-        .attr("x", 900)
-        .attr("y", 20)
-        .text("billion dollar economic burden on the U.S.")
+        .text(caption)
         .attr("font-size", "15px");
 
 };

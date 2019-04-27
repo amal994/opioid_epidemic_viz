@@ -31,27 +31,71 @@ const intro_stats = function(d3) {
         console.log(response);
         const container = d3.select("#stats_section");
         // update graphic based on step
-        if(response.index === 0 && response.direction === 'down' ){
+        if(response.index === 0){
             container.selectAll("*").remove();
             container.append("div").attr("id", "prescription-stat");
             prescriptions(d3);
         }
-        else if(response.index === 1 && response.direction === 'down'){
+        else if(response.index === 1){
             container.selectAll("*").remove();
             container.append("div").attr("id", "oneinfive");
             oneinfive(d3);
         }
-        else if(response.index === 2 && response.direction === 'down'){
+        else if(response.index === 2){
             container.selectAll("*").remove();
             container.append("div").attr("id", "fourtypercent");
             fourtypercent(d3);
         }
-        else if(response.index === 3 && response.direction === 'down'){
+        else if(response.index === 3){
             container.selectAll("*").remove();
-            container.append("div").attr("id", "other_stats");
-            container.append("div").attr("id", "other_stats_captions");
-            other_stats(d3);
-            other_stats_captions(d3);
+            const states_others = container.append("div")
+                .attr("id","other_stats_container")
+                .attr("viewBox", "0 0 960 600")
+                .style("width", "100%")
+                .style("height", "100%");
+
+            states_others.append("div").attr("id", "other_stats")
+                .attr("width", "100%")
+                .attr("height", "50%");
+            states_others.append("div").attr("id", "other_stats_captions")
+                .attr("width", "100%")
+                .attr("height", "50%");
+            other_stats(d3,0);
+            other_stats_captions(d3,0);
+        }
+        else if(response.index === 4){
+            container.selectAll("*").remove();
+            const states_others = container.append("div")
+                .attr("id","other_stats_container")
+                .attr("viewBox", "0 0 960 600")
+                .style("width", "100%")
+                .style("height", "100%");
+
+            states_others.append("div").attr("id", "other_stats")
+                .attr("width", "100%")
+                .attr("height", "50%");
+            states_others.append("div").attr("id", "other_stats_captions")
+                .attr("width", "100%")
+                .attr("height", "50%");
+            other_stats(d3,1);
+            other_stats_captions(d3, 1);
+        }
+        else if(response.index === 5){
+            container.selectAll("*").remove();
+            const states_others = container.append("div")
+                .attr("id","other_stats_container")
+                .attr("viewBox", "0 0 960 600")
+                .style("width", "100%")
+                .style("height", "100%");
+
+            states_others.append("div").attr("id", "other_stats")
+                .attr("width", "100%")
+                .attr("height", "50%");
+            states_others.append("div").attr("id", "other_stats_captions")
+                .attr("width", "100%")
+                .attr("height", "50%");
+            other_stats(d3,2);
+            other_stats_captions(d3, 2);
         }
     }
 
