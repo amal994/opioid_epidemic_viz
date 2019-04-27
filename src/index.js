@@ -14,6 +14,8 @@ import fourtypercent from './js/fourtypercent';
 import other_stats from './js/other_stats';
 import other_stats_captions from './js/other_stats_captions';
 import new_england_map from "./js/new_england_map";
+import prescriptions from "./js/millions_prescriptions";
+import Stickyfill from "stickyfilljs";
 
 // Log message to console
 logMessage('Its finished!!');
@@ -24,14 +26,22 @@ if (module.hot)       // eslint-disable-line no-undef
 // client-side js
 // run by the browser each time your view template is loaded
 //This line loads the map into the page.
+prescriptions(d3);
 oneinfive(d3);
-fourtypercent(d3);
-other_stats(d3);
-other_stats_captions(d3);
+//fourtypercent(d3);
+//other_stats(d3);
+//other_stats_captions(d3);
 map(d3);
-new_england_map(d3);
-timeline();
-comparative_chart(d3);
-barchart(d3);
-attacking_problem_chart(d3);
+//new_england_map(d3);
+//timeline();
+//comparative_chart(d3);
+//barchart(d3);
+//attacking_problem_chart(d3);
 
+function setupStickyfill() {
+    d3.selectAll('.sticky').each(function () {
+        Stickyfill.add(this);
+    });
+}
+
+setupStickyfill();

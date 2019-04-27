@@ -32,6 +32,7 @@
     "papaparse": "^4.6.3",
     "popper.js": "^1.15.0",
     "scrollama": "^2.0.0",
+    "stickyfilljs": "^2.1.0",
     "topojson": "^3.0.2"
   },
   "devDependencies": {

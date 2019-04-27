@@ -7,25 +7,29 @@
 </head>
 <body>
 <main>
-    <h1>Understanding the Opioid Crisis in the United States</h1>
     <div class="container-fluid">
-        <div class="row parallax">
-            <div id="oneinfive">
-                <p>"As many as 1 in 5 people recieve precriptions opioids long term for noncancer pain"</p>
+        <section id="title_not_scrollable" class="bg-gradient-dark text-white">
+            <header><h1>Understanding the Opioid Crisis in the United States</h1>
+                <h3>----------------------------------------------------------</h3></header>
+        </section>
+            <div id='intro_scrollable' class="row scrollable_section">
+            <div class="col-lg-4">
+                <div class="step" data-step='0'><p class="alert alert-info"> In 2016, health care providers across the US wrote more than 214 million prescriptions for opioid pain medication.</p></div>
+                <div class="step" data-step='1'><h3>As many as 1 in 5 people recieve precriptions opioids long term for noncancer pain</h3></div>
+                <div class="step" data-step='2'><h3>More than 40% of all US opioid overdose deaths in 2016 involve a prescription opioid</h3></div>
+                <div class="step" data-step='3'><h3>As many as 1 in 5 people recieve precriptions opioids long term for noncancer pain</h3></div>
             </div>
-        </div>
-        <div class="row parallax">
-            <div id="fourtypercent">
-                <p> "More than 40% of all US opioid overdose deaths in 2016 involve a prescription opioid"</p>
+            <div class="col-lg-7 sticky">
+                <div id="prescription-stat"></div>
+                <div id="oneinfive"></div>
+                <div id="fourtypercent">
+                    <p> "More than 40% of all US opioid overdose deaths in 2016 involve a prescription opioid"</p>
+                </div>
+                <div id="other_stats"></div>
+                <div id="other_stats_captions"></div>
             </div>
-        </div>
-
-        <div class="row parallax">
-            <div id="other_stats"></div>
-            <div id="other_stats_captions"></div>
-        </div>
-
-        <div class="row parallax">
+            </div>
+        <div id="demographics_scrollable" class="row scrollable_section">
             <h1>
                 The Demographics of The Opioid Epidemic
             </h1>
@@ -35,40 +39,40 @@
                 in tandem
                 to save at-risk lives. </p>
         </div>
-        <section id="scroll_map_timeline">
-            <article id="timeline">
-                <div class='timeline_step' data-step='1'>
+        <div id="scroll_map_timeline" class="row scrollable_section">
+            <div class="col-lg-2" id="timeline">
+                <div class='step timeline_step' data-step='1'>
                     <p>1999</p>
                 </div>
-                <div class='timeline_step' data-step='2'>
+                <div class='step timeline_step' data-step='2'>
                     <p>2000</p>
                 </div>
-                <div class='timeline_step' data-step='3'>
+                <div class='step timeline_step' data-step='3'>
                     <p>2001</p>
                 </div>
-                <div class='timeline_step' data-step='4'>
+                <div class='step timeline_step' data-step='4'>
                     <p>2002</p>
                 </div>
-            </article>
-            <figure>
+            </div>
+            <div class="col-lg-10 sticky">
                 <header>
                     <h1> Timeline of Opioid overdose</h1>
                 </header>
                 <div>
                 <svg id="map_visualization"></svg>
                 </div>
-            </figure>
-        </section>
+            </div>
+        </div>
 
-        <div class="row parallax">
+        <section id="compare_deaths_barchart scrollable" class="scrollable_section">
             <div class="col">
                 <h1> Death by Opioid overdose VS other causes of death</h1>
                 <div id="compare_opioid_death_barchart">
                     <svg id="compare_death"></svg>
                 </div>
             </div>
-        </div>
-        <div class="row parallax">
+        </section>
+        <section id="new_england_scrollable" class="scrollable_section">
             <div class="col">
                 <svg id="new_england_map"></svg>
             </div>
@@ -80,29 +84,29 @@
                     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
                     culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
-        </div>
-        <div class="row parallax">
+        </section>
+        <section id="deaths_by_age_scrollable" class="scrollable_section">
             <div class="col">
                 <h1> Opioid overdose deaths by age</h1>
                 <svg id="barchart"></svg>
             </div>
-        </div>
-        <div class="row parallax">
+        </section>
+        <section id="attacking_problem_scrollable" class="scrollable_section">
             <div class="col d-flex align-items-center justify-content-center" style="height: 600px">
                 <h1> Attacking the Problem</h1>
             </div>
-        </div>
-        <div class="row parallax">
+        </section>
+        <section id="causes_scrollable" class="scrollable_section">
             <div class="col">
                 <h1> Analysis of Cause</h1>
                 <svg id="attack_problem"></svg>
             </div>
-        </div>
-        <div class="row parallax">
+        </section>
+        <section class="conclusion_scrollable" class="scrollable_section">
             <div class="col  d-flex align-items-center justify-content-center" style="height: 600px">
                 <h1> Conclusion</h1>
             </div>
-        </div>
+        </section>
 
     </div>
 </main>
