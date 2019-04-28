@@ -137,11 +137,16 @@ footer {
 }
 
 .step {
-    min-height: 100vh;
+    min-height: 75vh;
     border: white;
 }
 
-
+.center_me{
+    margin-top: 100%;
+    position: relative;
+    top: 50%;
+    vertical-align: middle;
+}
 #intro_scrollable header {
     display: block;
 }
@@ -158,3 +163,25 @@ footer {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.tooltip_map {
+    background: rgba(0, 0, 0, 0.85);
+    color: #f9f9f9;
+    padding: 8px;
+}
+.tooltip_map h3 {
+    margin: 0px 0px 8px;
+}
+
+#year_mark {
+    z-index: 9999;
+    fill: white;
+    position: fixed;
+    padding: 2em;
+    left: 30%;
+    top: 30%;
+    transform: translate(-220%, -50%);
+    visibility: hidden;
+}
+
+.years_labels { padding-left: 50px;}

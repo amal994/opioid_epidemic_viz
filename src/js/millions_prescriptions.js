@@ -10,7 +10,6 @@ const prescriptions = function(d3) {
     function gridLayout(points, pointWidth, gridWidth) {
         const pointHeight = pointWidth;
         const pointsPerRow = Math.floor(gridWidth / pointWidth);
-        const numRows = points.length / pointsPerRow;
 
         points.forEach((point, i) => {
             point.x = pointWidth * (i % pointsPerRow);

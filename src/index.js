@@ -10,9 +10,7 @@ import comparative_chart from './js/comparative_chart';
 import barchart from './js/barchart';
 import attacking_problem_chart from './js/attacking_problem_chart';
 
-import other_stats from './js/other_stats';
-import other_stats_captions from './js/other_stats_captions';
-import new_england_map from "./js/new_england_map";
+//import new_england_map from "./js/new_england_map";
 import intro_stats from "./js/intro_stats";
 import Stickyfill from "stickyfilljs";
 
@@ -28,7 +26,7 @@ if (module.hot)       // eslint-disable-line no-undef
 intro_stats(d3);
 map(d3);
 timeline();
-new_england_map(d3);
+//new_england_map(d3);
 comparative_chart(d3);
 barchart(d3);
 attacking_problem_chart(d3);

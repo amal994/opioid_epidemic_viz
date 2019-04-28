@@ -20,6 +20,5 @@ const other_stats_captions = function (d3, i) {
         .attr("y", 20)
         .text(caption)
         .attr("font-size", "15px");
-
 };
 export default other_stats_captions;

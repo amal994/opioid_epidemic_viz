@@ -28,9 +28,9 @@ const intro_stats = function(d3) {
         step.classed('is-active', function (d, i) {
             return i === response.index;
         });
-        console.log(response);
         const container = d3.select("#stats_section");
         // update graphic based on step
+        d3.select("#year_mark").style("visibility","hidden");
         if(response.index === 0){
             container.selectAll("*").remove();
             container.append("div").attr("id", "prescription-stat");
@@ -108,7 +108,7 @@ const intro_stats = function(d3) {
         scroller_stat.setup({
             step: '#intro_scrollable .step',
             offset: 0.33,
-            debug: true,
+            debug: false,
         })
             .onStepEnter(handleStepEnter);
         // setup resize event
