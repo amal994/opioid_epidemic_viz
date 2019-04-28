@@ -1,24 +1,22 @@
-import * as topojson from 'topojson';
-import us_map from '../data/10m.json';
-
-const new_england_map = async function (d3) {
+const new_england_map = async function (d3, us_map, topojson) {
     // Data
     const data = Object.assign(new Map(await d3.csv("https://gist.githubusercontent.com/mbostock/682b782da9e1448e6eaac00bb3d3cd9d/raw/0e0a145ded8b1672701dc8b2a702e51c648312d4/unemployment.csv", ({id, rate}) => [id, +rate])), {title: "Unemployment rate (%)"})
 
     //US
     function filter_states(result) {
         const states = ["09", "25", "23", "33", "44", "50"];
-        result.objects.states.geometries = result.objects.states.geometries.filter(function(d) {
+        let new_result = JSON.parse(JSON.stringify(result));
+        new_result.objects.states.geometries = new_result.objects.states.geometries.filter(function(d) {
             return states.includes(d.id.slice(0, 2));
         });
-        result.objects.counties.geometries = result.objects.counties.geometries.filter(function(d) {
+        new_result.objects.counties.geometries = new_result.objects.counties.geometries.filter(function(d) {
             return states.includes(d.id.slice(0, 2));
         });
-        return result;
+        return new_result;
     }
-    const us = filter_states(us_map);
+    const map_new_england = filter_states(us_map);
     // States
-    const states = new Map(us.objects.states.geometries.map(d => [d.id, d.properties]));
+    const states = new Map(map_new_england.objects.states.geometries.map(d => [d.id, d.properties]));
     // Format
     const format = d => `${d}%`;
     // Color
@@ -53,7 +51,7 @@ const new_england_map = async function (d3) {
             .remove();
     };
 
-    var new_england = topojson.feature(us, us.objects.counties);
+    var new_england = topojson.feature(map_new_england, map_new_england.objects.counties);
 
     var projection = d3.geoIdentity().fitExtent([[20, 20], [940, 580]], new_england);
     var path = d3.geoPath(projection);
@@ -78,7 +76,7 @@ const new_england_map = async function (d3) {
     ${format(data.get(d.id))}`);
 
     svg.append("path")
-        .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
+        .datum(topojson.mesh(map_new_england, map_new_england.objects.states, (a, b) => a !== b))
         .attr("fill", "none")
         .attr("stroke", "white")
         .attr("stroke-linejoin", "round")

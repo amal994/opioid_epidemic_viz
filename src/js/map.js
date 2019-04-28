@@ -1,10 +1,9 @@
-import * as topojson from 'topojson';
-import us from '../data/10m.json';
-import county_data from '../data/state_year_data.csv';
+
+import death_by_state from '../data/state_year_data.csv';
 import 'intersection-observer';
 import scrollama from 'scrollama';
 //source: https://observablehq.com/@d3/bivariate-choropleth
-const map = function (d3) {
+const map = function (d3, us, topojson) {
     const years = ["1999","2000","2001","2002",
         "2003", "2004", "2005","2006",
         "2007","2008", "2009", "2010",
@@ -103,7 +102,7 @@ ${b} ${data_2.title[4]}`;
 
     var psv = d3.dsvFormat("|");
 
-    const county_data_2 = county_data.map((a) => {
+    const county_data_2 = death_by_state.map((a) => {
         return a.join("|")
     }).join('\n');
     const data_2 = Object.assign(new Map(psv.parse(county_data_2, ({State, State_Code, Year, Year_Code, Deaths, Population, Crude_Rate}) => [State_Code + "," + Year_Code, {
