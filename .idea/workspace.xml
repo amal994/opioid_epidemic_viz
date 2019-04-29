@@ -4,7 +4,9 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec895367-f9f4-48eb-9db4-e1402cb5cbc2" name="Default Changelist" comment="" />
+    <list default="true" id="ec895367-f9f4-48eb-9db4-e1402cb5cbc2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/html/index.html" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -46,8 +48,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/html/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="128" column="14" lean-forward="true" selection-start-line="128" selection-start-column="14" selection-end-line="128" selection-end-column="14" />
+            <state relative-caret-position="75">
+              <caret line="85" selection-start-line="85" selection-end-line="85" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#1;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" />
@@ -158,8 +160,8 @@
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/css/style.css" />
         <option value="$PROJECT_DIR$/src/js/map.js" />
-        <option value="$PROJECT_DIR$/src/html/index.html" />
         <option value="$PROJECT_DIR$/src/js/new_england_dashboard.js" />
+        <option value="$PROJECT_DIR$/src/html/index.html" />
       </list>
     </option>
   </component>
@@ -273,7 +275,7 @@
       <workItem from="1556309328341" duration="8000" />
       <workItem from="1556309366755" duration="16691000" />
       <workItem from="1556397737434" duration="21993000" />
-      <workItem from="1556463288549" duration="21948000" />
+      <workItem from="1556463288549" duration="22104000" />
     </task>
     <task id="LOCAL-00001" summary="[project] initial commit">
       <created>1554603769546</created>
@@ -307,10 +309,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101301000" />
+    <option name="totallyTimeSpent" value="101457000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="34" y="56" width="1280" height="777" extended-state="0" />
+    <frame x="43" y="23" width="1280" height="777" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24146147" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -647,8 +650,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/html/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="128" column="14" lean-forward="true" selection-start-line="128" selection-start-column="14" selection-end-line="128" selection-end-column="14" />
+        <state relative-caret-position="75">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
           <folding>
             <element signature="n#div#0;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#1;n#div#0;n#main#0;n#body#0;n#html#0;n#!!top" />
