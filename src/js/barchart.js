@@ -31,6 +31,7 @@ const barchart = function (d3) {
     const data1 = d3.csvParse(age_year2, ({Five_Year_Age_Groups, Year_Code, Deaths}) => {
         return {key: Five_Year_Age_Groups, year: Year_Code, value: Deaths};
     });
+    //TODO: Change this by adding a year selector
     var data =d3.nest()
         .key(function(d) { return d.key; })
         .rollup(function(v) { return d3.mean(v, function(d) { return d.value; }); })

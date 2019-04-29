@@ -12,7 +12,7 @@ import comparative_chart from './js/comparative_chart';
 import barchart from './js/barchart';
 import attacking_problem_chart from './js/attacking_problem_chart';
 import intro_stats from "./js/intro_stats";
-import new_england_map from "./js/new_england_map";
+import new_england_dashboard from "./js/new_england_dashboard";
 
 import us_map from './data/10m.json';
 
@@ -27,7 +27,7 @@ if (module.hot)       // eslint-disable-line no-undef
 //This line loads the map into the page.
 intro_stats(d3);
 map(d3, us_map, topojson);
-new_england_map(d3, us_map, topojson);
+new_england_dashboard(d3, us_map, topojson);
 comparative_chart(d3);
 barchart(d3);
 attacking_problem_chart(d3);

@@ -3,6 +3,7 @@ import death_by_state from '../data/state_year_data.csv';
 import 'intersection-observer';
 import scrollama from 'scrollama';
 //source: https://observablehq.com/@d3/bivariate-choropleth
+//http://bl.ocks.org/syntagmatic/623a3221d3e694f85967d83082fd4a77
 const map = function (d3, us, topojson) {
     const years = ["1999","2000","2001","2002",
         "2003", "2004", "2005","2006",

@@ -1,4 +1,11 @@
-const new_england_map = async function (d3, us_map, topojson) {
+import * as new_england_data from '../data/a5_newengland_cdc_general_filtered.csv'
+
+//sources: http://bl.ocks.org/diethardsteiner/3287802
+const new_england_dashboard =  function (d3, us_map, topojson) {
+    let ne_map = new_england_map(d3, us_map, topojson);
+};
+
+async function new_england_map(d3, us_map, topojson){
     // Data
     const data = Object.assign(new Map(await d3.csv("https://gist.githubusercontent.com/mbostock/682b782da9e1448e6eaac00bb3d3cd9d/raw/0e0a145ded8b1672701dc8b2a702e51c648312d4/unemployment.csv", ({id, rate}) => [id, +rate])), {title: "Unemployment rate (%)"})
 
@@ -58,8 +65,8 @@ const new_england_map = async function (d3, us_map, topojson) {
 
     const svg = d3.select("#new_england_map")
         .attr("viewBox", "0 0 960 600")
-        .style("width", "960")
-        .style("height", "600");
+        .style("width", "100%")
+        .style("height", "auto");
 
     svg.append("g")
         .attr("transform", "translate(600,40)")
@@ -83,6 +90,5 @@ const new_england_map = async function (d3, us_map, topojson) {
         .attr("d", path);
 
     return svg.node();
-};
-
-export default new_england_map;
+}
+export default new_england_dashboard;
