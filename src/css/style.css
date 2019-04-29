@@ -185,3 +185,8 @@ footer {
 }
 
 .years_labels { padding-left: 50px;}
+
+#new_england_dashboard {
+    width: 100vw;
+    height: 100vh;
+}
