@@ -14,11 +14,37 @@ const new_england_dashboard =  function (d3, us_map, topojson) {
             {State,State_Code,County_Code, Year, County,Total_Deaths,Total_Population,Total_Age_Adjusted_Rate,Female_Deaths, Male_Deaths, White_Age_Adjusted_Rate,Black_Age_Adjusted_Rate,API_Age_Adjusted_Rate,Native_American_Age_Adjusted_Rate,Heroin_Deaths,Heroin_Age_Adjusted_Rate,Other_Opioids_Deaths,Other_Opioids_Age_Adjusted_Rate,Methadone_Deaths,Methadone_Age_Adjusted_Rate,Other_Synthetic_Narcotics_Deaths,Other_Synthetic_Narcotics_Age_Adjusted_Rate,Other_Unspecified_Narcotics_Deaths,Other_Unspecified_Narcotics_Age_Adjusted_Rate}])),
         {title: ["State","State_Code","County","County_Code","Year","Total_Deaths","Total_Population","Total_Age_Adjusted_Rate","Female_Deaths","Male_Deaths","White_Age_Adjusted_Rate","Black_Age_Adjusted_Rate","API_Age_Adjusted_Rate","Native_American_Age_Adjusted_Rate","Heroin_Deaths","Heroin_Age_Adjusted_Rate","Other_Opioids_Deaths","Other_Opioids_Age_Adjusted_Rate","Methadone_Deaths","Methadone_Age_Adjusted_Rate","Other_Synthetic_Narcotics_Deaths","Other_Synthetic_Narcotics_Age_Adjusted_Rate","Other_Unspecified_Narcotics_Deaths","Other_Unspecified_Narcotics_Age_Adjusted_Rate"]});
 
-    let ne_map = new_england_map(d3, us_map, topojson, data);
+    const years = ["1999","2000","2001","2002",
+        "2003", "2004", "2005","2006",
+        "2007","2008", "2009", "2010",
+        "2011", "2012", "2013", "2014",
+        "2015", "2016","2017"];
+    let chosen_year = "1999";
+    d3.select("#inputYearNE")
+        .on("change", function(){
+            var x = document.getElementById("inputYearNE");
+            console.log(x.value);
+            chosen_year=years[x.value];
+            d3.select("#new_england_map").selectAll("*").remove();
+            new_england_map(d3, us_map, topojson, data, chosen_year);
+
+        })
+        .selectAll("option")
+        .data(years)
+        .enter()
+        .append("option")
+        .attr("value", (d,i) => {
+            return i;
+        })
+        .text((d) => {
+            return d;
+        })
+        .attr("class", "center_me years_labels");
+
+    let ne_map = new_england_map(d3, us_map, topojson, data, chosen_year);
 };
 
-async function new_england_map(d3, us_map, topojson, data){
-
+async function new_england_map(d3, us_map, topojson, data, year){
     //US
     function filter_states(result) {
         const states = ["09", "25", "23", "33", "44", "50"];
@@ -38,18 +64,18 @@ async function new_england_map(d3, us_map, topojson, data){
     const format = d => `${d}%`;
     // Color
     const color = d3.scaleThreshold()
-        .range(['#000000', '#87ceeb', '#a0c4e3', '#b4bad4', '#c2b2c7', '#cea9b9', '#d99faa', '#e1959d', '#e98b8e', '#f08080', "#ff514f", "#ff0600"])
-        .domain([-5, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45]);
+        .range(['#87ceeb', '#a0c4e3', '#b4bad4', '#c2b2c7', '#cea9b9', '#d99faa', '#e1959d', '#e98b8e', '#f08080', "#ff514f", "#ff0600"])
+        .domain([0, 5, 10, 15, 20, 25, 30, 35, 40, 45]);
     function colors(value) {
         if (value === "Suppressed" || value === "Unreliable")
-            return color(-5);
+            return color(0);
         return color(value);
     }
     // Legend
     const legend = g => {
         const x = d3.scaleLinear()
             .domain(d3.extent(color.domain()))
-            .rangeRound([-5, 250]);
+            .rangeRound([0, 250]);
 
         g.selectAll("rect")
             .data(color.range().map(d => color.invertExtent(d)))
@@ -60,7 +86,7 @@ async function new_england_map(d3, us_map, topojson, data){
                 if (!d[1])
                     d[1] = 45;
                 if (!d[0])
-                    d[0] = -5;
+                    d[0] = 0;
                     return x(d[1]) - x(d[0]);})
             .attr("fill", d => color(d[0]));
 
@@ -105,14 +131,14 @@ async function new_england_map(d3, us_map, topojson, data){
         .selectAll("path")
         .data(new_england.features)
         .join("path")
-        .attr("fill", d => colors(data.get(d.id+",2017")['Total_Age_Adjusted_Rate']))
+        .attr("fill", d => colors(data.get(d.id+","+year)['Total_Age_Adjusted_Rate']))
         .on("mouseover", function (d) {
-            var val = data.get(d.id + ",2017");
+            var val = data.get(d.id + ","+year);
             var fill_color = colors(val['Total_Age_Adjusted_Rate']);
             tooltip.html("");
             tooltip.style("visibility", "visible")
                 .style("border", "2px solid " + fill_color);
-            tooltip.append("h5").text(val["State"]+","+val["County"]);
+            tooltip.append("h5").text(val["County"]+", "+val["State"]);
             if (val) {
                 tooltip.append("div")
                     .text("Population: " + val["Total_Population"]);
@@ -141,10 +167,11 @@ async function new_england_map(d3, us_map, topojson, data){
             d3.selectAll(".ne_mesh")
                 .style("opacity", 1);
         })
+        .on("click", update_graphs)
         .attr("d", path)
         .append("title")
         .text(d => `${d.properties.name}, ${states.get(d.id.slice(0, 2)).name}
-    ${format(data.get(d.id+",2017")['Total_Age_Adjusted_Rate'])}`);
+    ${format(data.get(d.id+","+year)['Total_Age_Adjusted_Rate'])}`);
 
     svg.append("path")
         .attr("class","ne_mesh")
@@ -153,7 +180,11 @@ async function new_england_map(d3, us_map, topojson, data){
         .attr("stroke", "white")
         .attr("stroke-linejoin", "round")
         .attr("d", path);
-
     return svg.node();
+}
+
+function update_graphs(county,year){
+    updateGenderBarChart(county, year);
+    updateOpioidsLineChart(county, year);
 }
 export default new_england_dashboard;
