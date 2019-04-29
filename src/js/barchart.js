@@ -5,9 +5,9 @@ const barchart = function (d3) {
         width = 1200 - margin.left - margin.right,
         height = 520 - margin.top - margin.bottom;
 
-    var greyColor = "#898989";
-    var barColor = d3.interpolateInferno(0.4);
-    var highlightColor = d3.interpolateInferno(0.3);
+    var greyColor = "#FFF";
+    var barColor = d3.interpolateRainbow(0.8);
+    var highlightColor = "#ff6359";
 
     var formatPercent = d3.format("");
 
@@ -31,6 +31,7 @@ const barchart = function (d3) {
     const data1 = d3.csvParse(age_year2, ({Five_Year_Age_Groups, Year_Code, Deaths}) => {
         return {key: Five_Year_Age_Groups, year: Year_Code, value: Deaths};
     });
+
     //TODO: Change this by adding a year selector
     var data =d3.nest()
         .key(function(d) { return d.key; })

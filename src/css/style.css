@@ -13,7 +13,8 @@ body {
     height: 100%;
     font-family: 'Playfair Display', serif;
     color: #fff;
-    background-color: #1e203c;
+    /* background-color: #1e203c;*/
+    background-color: #212121;
     /*     margin: 2em; */
 }
 
@@ -184,7 +185,7 @@ footer {
     visibility: hidden;
 }
 
-.years_labels { padding-left: 50px;}
+.years_labels { padding-left: 100px;}
 
 #new_england_dashboard {
     width: 100vw;

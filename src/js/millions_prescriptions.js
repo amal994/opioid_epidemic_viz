@@ -162,7 +162,7 @@ const prescriptions = function(d3) {
     let layouts = [toGrid, toBeforeBottle, toBottle];
     let currLayout = 0;
     const ease = d3.easeCubic;
-    const duration = 1000;
+    const duration = 1500;
 
     // animate the points to a given layout
     function animate(layout) {
