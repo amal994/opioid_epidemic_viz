@@ -230,6 +230,7 @@ ${b} ${data_2.title[4]}`;
 
         return svg.node();
     }
+    create_states_on_map(years[0]);
 
 };
 
