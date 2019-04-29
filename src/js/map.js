@@ -149,7 +149,7 @@ ${b} ${data_2.title[4]}`;
                 tooltip.html("");
                 tooltip.style("visibility", "visible")
                     .style("border", "2px solid " + fill_color);
-                tooltip.append("h3").text(states.get(d.id).name);
+                tooltip.append("h5").text(states.get(d.id).name);
                 if (val) {
                     tooltip.append("div")
                         .text("Population: " + val["Population"]);
