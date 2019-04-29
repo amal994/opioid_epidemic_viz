@@ -242,7 +242,7 @@ function gender_barchart(d3, data, county, year) {
         height = 300 - margin.top - margin.bottom;
     var greyColor = "#ffffff";
     var barColor = d3.interpolateRainbow(0.8);
-    var highlightColor = d3.interpolateRainbow(0.2);
+    var highlightColor = "#ff0600";
 
     var formatPercent = d3.format("");
 
@@ -343,9 +343,9 @@ function gender_barchart(d3, data, county, year) {
         .attr("dy", "-.7em");
 }
 
-function update_graphs(county, year, d3) {
+function update_graphs(county, year, d3, data) {
     d3.select("#new_england_gender").selectAll("*").remove();
-    gender_barchart(d3, data, 'all', chosen_year);
+    gender_barchart(d3, data, county, year);
     //updateOpioidsLineChart(county, year);
 }
 
