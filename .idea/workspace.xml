@@ -4,10 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec895367-f9f4-48eb-9db4-e1402cb5cbc2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/new_england_dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/new_england_dashboard.js" afterDir="false" />
-    </list>
+    <list default="true" id="ec895367-f9f4-48eb-9db4-e1402cb5cbc2" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -173,8 +170,8 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="34" />
-    <option name="y" value="56" />
+    <option name="x" value="43" />
+    <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="777" />
   </component>
@@ -276,7 +273,7 @@
       <workItem from="1556309328341" duration="8000" />
       <workItem from="1556309366755" duration="16691000" />
       <workItem from="1556397737434" duration="21993000" />
-      <workItem from="1556463288549" duration="21791000" />
+      <workItem from="1556463288549" duration="21948000" />
     </task>
     <task id="LOCAL-00001" summary="[project] initial commit">
       <created>1554603769546</created>
@@ -310,11 +307,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101144000" />
+    <option name="totallyTimeSpent" value="101301000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="34" y="56" width="1280" height="777" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24146147" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

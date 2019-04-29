@@ -67,10 +67,10 @@ const oneinfive = function (d3) {
         .attr("width", 1000)
         .attr("height", 500);
 
-    var img_data = [{"cx": 500, "link": person3},
+    var img_data = [{"cx": 700, "link": person3},
+        {"cx": 550, "link": person3},
         {"cx": 400, "link": person3},
-        {"cx": 300, "link": person3},
-        {"cx": 200, "link": person3},
+        {"cx": 250, "link": person3},
         {"cx": 100, "link": person2}];
 
     var images = svg.selectAll("image").data(img_data).enter().append("image");
