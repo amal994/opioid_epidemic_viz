@@ -51,8 +51,10 @@ const new_england_dashboard = function (d3, us_map, topojson) {
             chosen_year = years[x.value];
             d3.select("#new_england_map").selectAll("*").remove();
             d3.select("#new_england_gender").selectAll("*").remove();
+            d3.select("#new_england_opioid_type").selectAll("*").remove();
             new_england_map(d3, us_map, topojson, data, chosen_year);
             gender_barchart(d3, data, 'all', chosen_year);
+            opioid_type_barchart(d3, data, 'all', chosen_year);
         })
         .selectAll("option")
         .data(years)
@@ -68,6 +70,8 @@ const new_england_dashboard = function (d3, us_map, topojson) {
 
     new_england_map(d3, us_map, topojson, data, chosen_year);
     gender_barchart(d3, data, "all", chosen_year);
+    opioid_type_barchart(d3, data, 'all', chosen_year);
+
 };
 
 async function new_england_map(d3, us_map, topojson, data, year) {
@@ -151,6 +155,13 @@ async function new_england_map(d3, us_map, topojson, data, year) {
         .attr("viewBox", "0 0 960 600")
         .style("width", "100%")
         .style("height", "auto");
+
+    svg.append("text")
+        .attr("transform", "translate(200,20)")
+        .attr("text-anchor", "middle")
+        .style("font-size", "20px")
+        .style("fill", "white")
+        .text("Overdose Deaths in New England");
 
     svg.append("g")
         .attr("transform", "translate(600,40)")
@@ -239,10 +250,10 @@ function gender_barchart(d3, data, county, year) {
 
     var margin = {top: 40, right: 30, bottom: 30, left: 50},
         width = 400 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom;
+        height = 270 - margin.top - margin.bottom;
     var greyColor = "#ffffff";
     var barColor = d3.interpolateRainbow(0.8);
-    var highlightColor = "#ff0600";
+    var highlightColor = "#ff6359";
 
     var formatPercent = d3.format("");
 
@@ -267,6 +278,14 @@ function gender_barchart(d3, data, county, year) {
     y.domain([0, d3.max([data.get(county + "," + year)['Male_Deaths'], data.get(county + "," + year)['Female_Deaths']], (d) => {
         return parseInt(d);
     })]);
+
+    svg.append("text")
+        .attr("x", (width / 2)-10)
+        .attr("y", -8 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("fill", "white")
+        .text("Deaths by Gender");
 
     svg.append("g")
         .attr("class", "x axis")
@@ -343,10 +362,157 @@ function gender_barchart(d3, data, county, year) {
         .attr("dy", "-.7em");
 }
 
+
+function opioid_type_barchart(d3, data, county, year) {
+    //if county =all:
+    if (county === "all") {
+        data = Object.assign(new Map([['all,1999', {'Heroin_Deaths':80, 'Methadone_Deaths':0, 'Other_Synthetic_Narcotics_Deaths':0, 'Other_Unspecified_Narcotics_Deaths':266, 'Other_Opioids_Deaths':0}],
+            ['all,2000', {'Heroin_Deaths':83, 'Methadone_Deaths':0, 'Other_Synthetic_Narcotics_Deaths':0, 'Other_Unspecified_Narcotics_Deaths':298, 'Other_Opioids_Deaths':0}],
+            ['all,2001', {'Heroin_Deaths':70, 'Methadone_Deaths':0, 'Other_Synthetic_Narcotics_Deaths':0, 'Other_Unspecified_Narcotics_Deaths':437, 'Other_Opioids_Deaths':47}],
+            ['all,2002', {'Heroin_Deaths':71, 'Methadone_Deaths':40, 'Other_Synthetic_Narcotics_Deaths':0, 'Other_Unspecified_Narcotics_Deaths':413, 'Other_Opioids_Deaths':70}],
+            ['all,2003', {'Heroin_Deaths':88, 'Methadone_Deaths':24, 'Other_Synthetic_Narcotics_Deaths':0, 'Other_Unspecified_Narcotics_Deaths':482, 'Other_Opioids_Deaths':57}],
+            ['all,2004', {'Heroin_Deaths':72, 'Methadone_Deaths':69, 'Other_Synthetic_Narcotics_Deaths':0, 'Other_Unspecified_Narcotics_Deaths':344, 'Other_Opioids_Deaths':36}],
+            ['all,2005', {'Heroin_Deaths':67, 'Methadone_Deaths':120, 'Other_Synthetic_Narcotics_Deaths':12, 'Other_Unspecified_Narcotics_Deaths':396, 'Other_Opioids_Deaths':95}],
+            ['all,2006', {'Heroin_Deaths':79, 'Methadone_Deaths':258, 'Other_Synthetic_Narcotics_Deaths':71, 'Other_Unspecified_Narcotics_Deaths':401, 'Other_Opioids_Deaths':170}],
+            ['all,2007', {'Heroin_Deaths':114, 'Methadone_Deaths':217, 'Other_Synthetic_Narcotics_Deaths':31, 'Other_Unspecified_Narcotics_Deaths':307, 'Other_Opioids_Deaths':199}],
+            ['all,2008', {'Heroin_Deaths':111, 'Methadone_Deaths':118, 'Other_Synthetic_Narcotics_Deaths':31, 'Other_Unspecified_Narcotics_Deaths':367, 'Other_Opioids_Deaths':225}],
+            ['all,2009', {'Heroin_Deaths':105, 'Methadone_Deaths':162, 'Other_Synthetic_Narcotics_Deaths':12, 'Other_Unspecified_Narcotics_Deaths':352, 'Other_Opioids_Deaths':219}],
+            ['all,2010', {'Heroin_Deaths':81, 'Methadone_Deaths':102, 'Other_Synthetic_Narcotics_Deaths':32, 'Other_Unspecified_Narcotics_Deaths':276, 'Other_Opioids_Deaths':248}],
+            ['all,2011', {'Heroin_Deaths':217, 'Methadone_Deaths':56, 'Other_Synthetic_Narcotics_Deaths':25, 'Other_Unspecified_Narcotics_Deaths':331, 'Other_Opioids_Deaths':267}],
+            ['all,2012', {'Heroin_Deaths':341, 'Methadone_Deaths':96, 'Other_Synthetic_Narcotics_Deaths':23, 'Other_Unspecified_Narcotics_Deaths':272, 'Other_Opioids_Deaths':292}],
+            ['all,2013', {'Heroin_Deaths':570, 'Methadone_Deaths':120, 'Other_Synthetic_Narcotics_Deaths':100, 'Other_Unspecified_Narcotics_Deaths':436, 'Other_Opioids_Deaths':412}],
+            ['all,2014', {'Heroin_Deaths':884, 'Methadone_Deaths':112, 'Other_Synthetic_Narcotics_Deaths':737, 'Other_Unspecified_Narcotics_Deaths':473, 'Other_Opioids_Deaths':445}],
+            ['all,2015', {'Heroin_Deaths':1132, 'Methadone_Deaths':130, 'Other_Synthetic_Narcotics_Deaths':1603, 'Other_Unspecified_Narcotics_Deaths':513, 'Other_Opioids_Deaths':544}],
+            ['all,2016', {'Heroin_Deaths':1126, 'Methadone_Deaths':160, 'Other_Synthetic_Narcotics_Deaths':2740, 'Other_Unspecified_Narcotics_Deaths':392, 'Other_Opioids_Deaths':634}],
+            ['all,2017', {'Heroin_Deaths':942, 'Methadone_Deaths':150, 'Other_Synthetic_Narcotics_Deaths':3165, 'Other_Unspecified_Narcotics_Deaths':227, 'Other_Opioids_Deaths':525}]]));
+    }
+
+    var margin = {top: 40, right: 30, bottom: 80, left: 50},
+        width = 400 - margin.left - margin.right,
+        height = 270 - margin.top - margin.bottom;
+    var greyColor = "#ffffff";
+    var barColor = d3.interpolateRainbow(0.8);
+    var highlightColor = "#ff6359";
+
+    var formatPercent = d3.format("");
+
+    var svg = d3.select("#new_england_opioid_type")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleBand()
+        .range([0, width])
+        .padding(0.4);
+    var y = d3.scaleLinear()
+        .range([height, 0]);
+
+    var xAxis = d3.axisBottom(x).tickSize([]).tickPadding(10);
+    var yAxis = d3.axisLeft(y).tickFormat(formatPercent);
+
+    //data = data.slice(4,14);
+    let opioids = ["Heroin", "Methadone","Synthetic Narcotics","Unspecified Narcotics", "Other"];
+    x.domain(opioids);
+    y.domain([0, d3.max([data.get(county + "," + year)['Heroin_Deaths'], data.get(county + "," + year)['Methadone_Deaths'], data.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Opioids_Deaths']], (d) => {
+        return parseInt(d);
+    })]);
+
+    svg.append("text")
+        .attr("x", (width / 2)-10)
+        .attr("y", -8 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("fill", "white")
+        .text("Deaths by Opioid Type");
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+        .selectAll("text")
+        .attr("y", 0)
+        .attr("x", 9)
+        .attr("dy", ".35em")
+        .attr("transform", "rotate(45)")
+        .style("text-anchor", "start");
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+    svg.selectAll(".bar")
+        .data([data.get(county + "," + year)['Heroin_Deaths'], data.get(county + "," + year)['Methadone_Deaths'], data.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Opioids_Deaths']])
+        .enter().append("rect")
+        .attr("class", "bar")
+        .style("display", d => {
+            return d === null ? "none" : null;
+        })
+        .style("fill", d => {
+            return parseInt(d) === d3.max([data.get(county + "," + year)['Heroin_Deaths'], data.get(county + "," + year)['Methadone_Deaths'], data.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Opioids_Deaths']], d => {
+                return parseInt(d);
+            })
+                ? highlightColor : barColor
+        })
+        .attr("x", (d, i) => {
+            return x(opioids[i]);
+        })
+        .attr("width", x.bandwidth())
+        .attr("y", () => {
+            return height;
+        })
+        .attr("height", 0)
+        .transition()
+        .duration(750)
+        .delay(function (d, i) {
+            return i * 150;
+        })
+        .attr("y", d => {
+            return y(d);
+        })
+        .attr("height", d => {
+            return height - y(d);
+        });
+
+    svg.selectAll(".label")
+        .data([data.get(county + "," + year)['Heroin_Deaths'], data.get(county + "," + year)['Methadone_Deaths'], data.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Opioids_Deaths']])
+        .enter()
+        .append("text")
+        .attr("class", "label")
+        .style("display", d => {
+            return d === null ? "none" : null;
+        })
+        .attr("x", ((d, i) => {
+            return x(opioids[i]) + (x.bandwidth() / 2) - 8;
+        }))
+        .style("fill", d => {
+            return parseInt(d) === d3.max([data.get(county + "," + year)['Heroin_Deaths'], data.get(county + "," + year)['Methadone_Deaths'], data.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Opioids_Deaths']], d => {
+                return parseInt(d);
+            }) ? highlightColor : greyColor
+        })
+        .attr("y", () => {
+            return height;
+        })
+        .attr("height", 0)
+        .transition()
+        .duration(750)
+        .delay((d, i) => {
+            return i * 150;
+        })
+        .text(d => {
+            return formatPercent(d);
+        })
+        .attr("y", d => {
+            return y(d) + .1;
+        })
+        .attr("dy", "-.7em");
+}
+
 function update_graphs(county, year, d3, data) {
     d3.select("#new_england_gender").selectAll("*").remove();
+    d3.select("#new_england_opioid_type").selectAll("*").remove();
     gender_barchart(d3, data, county, year);
-    //updateOpioidsLineChart(county, year);
+    opioid_type_barchart(d3, data, county, year);
+    //opioid_type_barchart(county, year);
 }
 
 export default new_england_dashboard;
