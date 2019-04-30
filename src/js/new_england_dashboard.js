@@ -279,7 +279,9 @@ function gender_barchart(data, county, year) {
     y.domain([0, d3.max([data2.get(county + "," + year)['Male_Deaths'], data2.get(county + "," + year)['Female_Deaths']], (d) => {
         return parseInt(d);
     })]);
-
+    if (isNaN(y.domain()[1])){
+        y.domain([0, 20]);
+    }
     svg.append("text")
         .attr("x", (width / 2)-10)
         .attr("y", -8 - (margin.top / 2))
@@ -324,13 +326,13 @@ function gender_barchart(data, county, year) {
         })
         .attr("y", d => {
             if(d === "Suppressed"){
-                return 5;
+                return y(5);
             }
             return y(d);
         })
         .attr("height", d => {
             if(d === "Suppressed"){
-                return height - 5;
+                return height - y(5);
             }
             return height - y(d);
         });
@@ -368,7 +370,7 @@ function gender_barchart(data, county, year) {
         })
         .attr("y", d => {
             if(d === "Suppressed"){
-                return 5.1;
+                return y(5)+ .1;
             }
             return y(d) + .1;
         })
@@ -430,7 +432,9 @@ function opioid_type_barchart(data, county, year) {
     y.domain([0, d3.max([data2.get(county + "," + year)['Heroin_Deaths'], data2.get(county + "," + year)['Methadone_Deaths'], data2.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Opioids_Deaths']], (d) => {
         return parseInt(d);
     })]);
-
+    if (isNaN(y.domain()[1])){
+        y.domain([0, 20]);
+    }
     svg.append("text")
         .attr("x", (width / 2)-10)
         .attr("y", -8 - (margin.top / 2))
@@ -481,13 +485,13 @@ function opioid_type_barchart(data, county, year) {
         })
         .attr("y", d => {
             if(d === "Suppressed"){
-                return 5;
+                return y(5);
             }
             return y(d);
         })
         .attr("height", d => {
             if(d === "Suppressed"){
-                return  height -  5;
+                return  height -  y(5);
             }
             return height - y(d);
         });
@@ -518,7 +522,6 @@ function opioid_type_barchart(data, county, year) {
             return i * 150;
         })
         .text(function(d){
-            console.log(d);
             if (d === "Suppressed"){
                 return "S";
             }
@@ -526,14 +529,14 @@ function opioid_type_barchart(data, county, year) {
         })
         .attr("y", function(d){
             if(d === "Suppressed"){
-                return 5.1;
+                return y(5)+ .1;
             }
             return y(d) + .1;
         })
         .attr("dy", "-.7em");
 }
 
-function update_graphs(d, i) {
+function update_graphs(d) {
     d3.select("#new_england_gender").selectAll("*").remove();
     d3.select("#new_england_opioid_type").selectAll("*").remove();
     gender_barchart(data, d.id, chosen_year);
