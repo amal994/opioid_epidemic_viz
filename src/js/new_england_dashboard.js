@@ -52,9 +52,9 @@ const new_england_dashboard = function (d3, us_map, topojson) {
             d3.select("#new_england_map").selectAll("*").remove();
             d3.select("#new_england_gender").selectAll("*").remove();
             d3.select("#new_england_opioid_type").selectAll("*").remove();
-            new_england_map(d3, us_map, topojson, data, chosen_year);
-            gender_barchart(d3, data, 'all', chosen_year);
-            opioid_type_barchart(d3, data, 'all', chosen_year);
+            new_england_map(data, chosen_year);
+            gender_barchart(data,'all', chosen_year);
+            opioid_type_barchart(data,'all', chosen_year);
         })
         .selectAll("option")
         .data(years)
@@ -68,13 +68,13 @@ const new_england_dashboard = function (d3, us_map, topojson) {
         })
         .attr("class", "center_me years_labels");
 
-    new_england_map(d3, us_map, topojson, data, chosen_year);
-    gender_barchart(d3, data, "all", chosen_year);
-    opioid_type_barchart(d3, data, 'all', chosen_year);
+    new_england_map(data, chosen_year);
+    gender_barchart(data,"all", chosen_year);
+    opioid_type_barchart(data,'all', chosen_year);
 
-};
 
-async function new_england_map(d3, us_map, topojson, data, year) {
+
+async function new_england_map(data, year) {
     //US
     function filter_states(result) {
         const states = ["09", "25", "23", "33", "44", "50"];
@@ -224,10 +224,11 @@ async function new_england_map(d3, us_map, topojson, data, year) {
     return svg.node();
 }
 
-function gender_barchart(d3, data, county, year) {
+function gender_barchart(data, county, year) {
     //if county =all:
+    let data2 = data;
     if (county === "all") {
-        data = Object.assign(new Map([["all,1999", {"Male_Deaths": 342, "Female_Deaths": 131}],
+        data2 = Object.assign(new Map([["all,1999", {"Male_Deaths": 342, "Female_Deaths": 131}],
             ["all,2000", {"Male_Deaths": 370, "Female_Deaths": 104}],
             ["all,2001", {"Male_Deaths": 533, "Female_Deaths": 183}],
             ["all,2002", {"Male_Deaths": 543, "Female_Deaths": 203}],
@@ -275,7 +276,7 @@ function gender_barchart(d3, data, county, year) {
     //data = data.slice(4,14);
     let genders = ["Female Deaths", "Male Deaths"];
     x.domain(genders);
-    y.domain([0, d3.max([data.get(county + "," + year)['Male_Deaths'], data.get(county + "," + year)['Female_Deaths']], (d) => {
+    y.domain([0, d3.max([data2.get(county + "," + year)['Male_Deaths'], data2.get(county + "," + year)['Female_Deaths']], (d) => {
         return parseInt(d);
     })]);
 
@@ -296,14 +297,14 @@ function gender_barchart(d3, data, county, year) {
         .call(yAxis);
 
     svg.selectAll(".bar")
-        .data([data.get(county + "," + year)['Female_Deaths'], data.get(county + "," + year)['Male_Deaths']])
+        .data([data2.get(county + "," + year)['Female_Deaths'], data2.get(county + "," + year)['Male_Deaths']])
         .enter().append("rect")
         .attr("class", "bar")
         .style("display", d => {
             return d === null ? "none" : null;
         })
         .style("fill", d => {
-            return parseInt(d) === d3.max([data.get(county + "," + year)['Female_Deaths'], data.get(county + "," + year)['Male_Deaths']], d => {
+            return parseInt(d) === d3.max([data2.get(county + "," + year)['Female_Deaths'], data2.get(county + "," + year)['Male_Deaths']], d => {
                 return parseInt(d);
             })
                 ? highlightColor : barColor
@@ -322,14 +323,20 @@ function gender_barchart(d3, data, county, year) {
             return i * 150;
         })
         .attr("y", d => {
+            if(d === "Suppressed"){
+                return 5;
+            }
             return y(d);
         })
         .attr("height", d => {
+            if(d === "Suppressed"){
+                return height - 5;
+            }
             return height - y(d);
         });
 
     svg.selectAll(".label")
-        .data([data.get(county + "," + year)['Female_Deaths'], data.get(county + "," + year)['Male_Deaths']])
+        .data([data2.get(county + "," + year)['Female_Deaths'], data2.get(county + "," + year)['Male_Deaths']])
         .enter()
         .append("text")
         .attr("class", "label")
@@ -340,7 +347,7 @@ function gender_barchart(d3, data, county, year) {
             return x(genders[i]) + (x.bandwidth() / 2) - 8;
         }))
         .style("fill", d => {
-            return parseInt(d) === d3.max([data.get(county + "," + year)['Female_Deaths'], data.get(county + "," + year)['Male_Deaths']], d => {
+            return parseInt(d) === d3.max([data2.get(county + "," + year)['Female_Deaths'], data2.get(county + "," + year)['Male_Deaths']], d => {
                 return parseInt(d);
             }) ? highlightColor : greyColor
         })
@@ -354,19 +361,26 @@ function gender_barchart(d3, data, county, year) {
             return i * 150;
         })
         .text(d => {
+            if(d === "Suppressed"){
+                return "S";
+            }
             return formatPercent(d);
         })
         .attr("y", d => {
+            if(d === "Suppressed"){
+                return 5.1;
+            }
             return y(d) + .1;
         })
         .attr("dy", "-.7em");
 }
 
 
-function opioid_type_barchart(d3, data, county, year) {
+function opioid_type_barchart(data, county, year) {
     //if county =all:
+    let data2 = data;
     if (county === "all") {
-        data = Object.assign(new Map([['all,1999', {'Heroin_Deaths':80, 'Methadone_Deaths':0, 'Other_Synthetic_Narcotics_Deaths':0, 'Other_Unspecified_Narcotics_Deaths':266, 'Other_Opioids_Deaths':0}],
+        data2 = Object.assign(new Map([['all,1999', {'Heroin_Deaths':80, 'Methadone_Deaths':0, 'Other_Synthetic_Narcotics_Deaths':0, 'Other_Unspecified_Narcotics_Deaths':266, 'Other_Opioids_Deaths':0}],
             ['all,2000', {'Heroin_Deaths':83, 'Methadone_Deaths':0, 'Other_Synthetic_Narcotics_Deaths':0, 'Other_Unspecified_Narcotics_Deaths':298, 'Other_Opioids_Deaths':0}],
             ['all,2001', {'Heroin_Deaths':70, 'Methadone_Deaths':0, 'Other_Synthetic_Narcotics_Deaths':0, 'Other_Unspecified_Narcotics_Deaths':437, 'Other_Opioids_Deaths':47}],
             ['all,2002', {'Heroin_Deaths':71, 'Methadone_Deaths':40, 'Other_Synthetic_Narcotics_Deaths':0, 'Other_Unspecified_Narcotics_Deaths':413, 'Other_Opioids_Deaths':70}],
@@ -386,7 +400,6 @@ function opioid_type_barchart(d3, data, county, year) {
             ['all,2016', {'Heroin_Deaths':1126, 'Methadone_Deaths':160, 'Other_Synthetic_Narcotics_Deaths':2740, 'Other_Unspecified_Narcotics_Deaths':392, 'Other_Opioids_Deaths':634}],
             ['all,2017', {'Heroin_Deaths':942, 'Methadone_Deaths':150, 'Other_Synthetic_Narcotics_Deaths':3165, 'Other_Unspecified_Narcotics_Deaths':227, 'Other_Opioids_Deaths':525}]]));
     }
-
     var margin = {top: 40, right: 30, bottom: 80, left: 50},
         width = 400 - margin.left - margin.right,
         height = 270 - margin.top - margin.bottom;
@@ -414,7 +427,7 @@ function opioid_type_barchart(d3, data, county, year) {
     //data = data.slice(4,14);
     let opioids = ["Heroin", "Methadone","Synthetic Narcotics","Unspecified Narcotics", "Other"];
     x.domain(opioids);
-    y.domain([0, d3.max([data.get(county + "," + year)['Heroin_Deaths'], data.get(county + "," + year)['Methadone_Deaths'], data.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Opioids_Deaths']], (d) => {
+    y.domain([0, d3.max([data2.get(county + "," + year)['Heroin_Deaths'], data2.get(county + "," + year)['Methadone_Deaths'], data2.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Opioids_Deaths']], (d) => {
         return parseInt(d);
     })]);
 
@@ -441,14 +454,14 @@ function opioid_type_barchart(d3, data, county, year) {
         .call(yAxis);
 
     svg.selectAll(".bar")
-        .data([data.get(county + "," + year)['Heroin_Deaths'], data.get(county + "," + year)['Methadone_Deaths'], data.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Opioids_Deaths']])
+        .data([data2.get(county + "," + year)['Heroin_Deaths'], data2.get(county + "," + year)['Methadone_Deaths'], data2.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Opioids_Deaths']])
         .enter().append("rect")
         .attr("class", "bar")
         .style("display", d => {
             return d === null ? "none" : null;
         })
         .style("fill", d => {
-            return parseInt(d) === d3.max([data.get(county + "," + year)['Heroin_Deaths'], data.get(county + "," + year)['Methadone_Deaths'], data.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Opioids_Deaths']], d => {
+            return parseInt(d) === d3.max([data2.get(county + "," + year)['Heroin_Deaths'], data2.get(county + "," + year)['Methadone_Deaths'], data2.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Opioids_Deaths']], d => {
                 return parseInt(d);
             })
                 ? highlightColor : barColor
@@ -467,14 +480,20 @@ function opioid_type_barchart(d3, data, county, year) {
             return i * 150;
         })
         .attr("y", d => {
+            if(d === "Suppressed"){
+                return 5;
+            }
             return y(d);
         })
         .attr("height", d => {
+            if(d === "Suppressed"){
+                return  height -  5;
+            }
             return height - y(d);
         });
 
     svg.selectAll(".label")
-        .data([data.get(county + "," + year)['Heroin_Deaths'], data.get(county + "," + year)['Methadone_Deaths'], data.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Opioids_Deaths']])
+        .data([data2.get(county + "," + year)['Heroin_Deaths'], data2.get(county + "," + year)['Methadone_Deaths'], data2.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Opioids_Deaths']])
         .enter()
         .append("text")
         .attr("class", "label")
@@ -485,7 +504,7 @@ function opioid_type_barchart(d3, data, county, year) {
             return x(opioids[i]) + (x.bandwidth() / 2) - 8;
         }))
         .style("fill", d => {
-            return parseInt(d) === d3.max([data.get(county + "," + year)['Heroin_Deaths'], data.get(county + "," + year)['Methadone_Deaths'], data.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data.get(county + "," + year)['Other_Opioids_Deaths']], d => {
+            return parseInt(d) === d3.max([data2.get(county + "," + year)['Heroin_Deaths'], data2.get(county + "," + year)['Methadone_Deaths'], data2.get(county + "," + year)['Other_Synthetic_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Unspecified_Narcotics_Deaths'],  data2.get(county + "," + year)['Other_Opioids_Deaths']], d => {
                 return parseInt(d);
             }) ? highlightColor : greyColor
         })
@@ -498,21 +517,30 @@ function opioid_type_barchart(d3, data, county, year) {
         .delay((d, i) => {
             return i * 150;
         })
-        .text(d => {
+        .text(function(d){
+            console.log(d);
+            if (d === "Suppressed"){
+                return "S";
+            }
             return formatPercent(d);
         })
-        .attr("y", d => {
+        .attr("y", function(d){
+            if(d === "Suppressed"){
+                return 5.1;
+            }
             return y(d) + .1;
         })
         .attr("dy", "-.7em");
 }
 
-function update_graphs(county, year, d3, data) {
+function update_graphs(d, i) {
     d3.select("#new_england_gender").selectAll("*").remove();
     d3.select("#new_england_opioid_type").selectAll("*").remove();
-    gender_barchart(d3, data, county, year);
-    opioid_type_barchart(d3, data, county, year);
+    gender_barchart(data, d.id, chosen_year);
+    opioid_type_barchart(data, d.id, chosen_year);
     //opioid_type_barchart(county, year);
 }
+
+};
 
 export default new_england_dashboard;
