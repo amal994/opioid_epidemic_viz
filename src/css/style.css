@@ -187,12 +187,13 @@ footer {
 
 .years_labels { padding-left: 50px;}
 
-#new_england_dashboard {
+
+#deaths_by_age_scrollable {
     width: 100vw;
     height: 100vh;
 }
 
-#deaths_by_age_scrollable {
+#attacking_problem_scrollable{
     width: 100vw;
     height: 100vh;
 }
