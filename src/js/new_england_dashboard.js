@@ -404,7 +404,7 @@ function opioid_type_barchart(data, county, year) {
     }
     var margin = {top: 40, right: 30, bottom: 80, left: 50},
         width = 400 - margin.left - margin.right,
-        height = 270 - margin.top - margin.bottom;
+        height = 300 - margin.top - margin.bottom;
     var greyColor = "#ffffff";
     var barColor = d3.interpolateRainbow(0.8);
     var highlightColor = "#ff6359";
