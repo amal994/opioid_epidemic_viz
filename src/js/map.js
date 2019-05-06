@@ -225,7 +225,7 @@ ${b} ${data_2.title[4]}`;
                 if (d === -1) {
                     return "Supressed or Unreliable"
                 }
-                return d + " %";
+                return d;
             });
 
         return svg.node();
