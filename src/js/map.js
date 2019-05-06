@@ -133,7 +133,7 @@ ${b} ${data_2.title[4]}`;
     }
     const svg = d3.select("#map_visualization")
         .attr("viewBox", "0 0 960 600")
-        .style("width", "80%")
+        .style("width", "75%")
         .style("height", "auto");
 
     function create_states_on_map(yearf){
