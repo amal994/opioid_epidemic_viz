@@ -138,10 +138,28 @@ footer {
 }
 
 .step {
-    min-height: 75vh;
+    min-height: 50vh;
     border: white;
 }
 
+.step.is-bottom {
+    bottom: 0;
+    top: auto;
+}
+.timeline_step {
+    min-height: 0vh;
+    border: white;
+}
+.timeline_step {
+    opacity: 0.25;
+}
+
+.timeline_step.is-active {
+    opacity: 1;
+}
+#scroll_map_timeline .is-active {
+    fill: red;
+}
 .center_me{
     margin-top: 100%;
     position: relative;

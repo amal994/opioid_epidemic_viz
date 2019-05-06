@@ -15,11 +15,11 @@ const map = function (d3, us, topojson) {
         .data(years)
         .enter()
         .append("div")
-        .attr("class", "step timeline_step")
+        .attr("class", "timeline_step")
         .attr("data-step", (d,i) => {
             return i;
         })
-        .append("h2")
+        .append("h1")
         .text((d) => {
             return d;
         })
@@ -74,7 +74,7 @@ const map = function (d3, us, topojson) {
         // 3. bind scrollama event handlers (this can be chained like below)
         scroller.setup({
             step: '#scroll_map_timeline .timeline_step',
-            offset: 0.33,
+            offset: 0.50,
             debug: false,
         })
             .onStepEnter(handleStepEnter);
