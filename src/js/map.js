@@ -199,7 +199,7 @@ ${b} ${data_2.title[4]}`;
             .attr("x", width - 132)
             .attr("y", height - 70)
             .style("fill", "white")
-            .text("Overdose Deaths");
+            .text("Deaths per 100,000");
 
         var legend = svg.selectAll(".legend")
             .data(colors.domain().reverse())

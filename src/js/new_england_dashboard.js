@@ -130,7 +130,7 @@ async function new_england_map(data, year) {
             .attr("fill", "currentColor")
             .attr("text-anchor", "start")
             .attr("font-weight", "bold")
-            .text("Overdose Deaths Crude Rate");
+            .text("Deaths per 100,000");
 
         g.call(d3.axisBottom(x)
             .tickSize(13)
@@ -186,7 +186,7 @@ async function new_england_map(data, year) {
                 tooltip.append("div")
                     .text("Deaths: " + val["Total_Deaths"]);
                 tooltip.append("div")
-                    .text("Crude Rate: " + val["Total_Age_Adjusted_Rate"]);
+                    .text("Deaths per 100,000: " + val["Total_Age_Adjusted_Rate"]);
             }
             d3.selectAll(".info_ne path")
                 .style("opacity", 0.3)
